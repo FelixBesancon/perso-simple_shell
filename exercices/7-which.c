@@ -16,7 +16,7 @@ char **get_path_array(char **path_cpy)
 	while (path[index] != '\0')
 		index++;
 	*path_cpy = malloc((index + 1) * sizeof(char));
-	if (path_cpy == NULL)
+	if (*path_cpy == NULL)
 		exit(1);
 	for (index = 0; path[index] != '\0'; index++)
 	{
@@ -31,7 +31,7 @@ char **get_path_array(char **path_cpy)
 		free(path_cpy);
 		exit(1);
 	}
-	path_token = strtok(path_cpy, ":");
+	path_token = strtok(*path_cpy, ":");
 	for (index = 0; path_token != NULL; index++)
 	{
 		path_array[index] = path_token;
@@ -51,5 +51,6 @@ int main(int ac, char **av)
 	path_array = get_path_array(&path_cpy);
 
 	free(path_array);
-	free(path_cpy);
+	free(*path_cpy);
+	return (0);
 }
